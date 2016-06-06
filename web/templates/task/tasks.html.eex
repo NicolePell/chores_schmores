@@ -1,0 +1,1 @@
+<h1><%= String.capitalize @name %>'s Tasks</h1>

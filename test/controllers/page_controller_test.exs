@@ -1,4 +1,4 @@
-defmodule ChoresSchmores.PageControllerTest do
+defmodule ChoresSchmores.HomeControllerTest do
   use ChoresSchmores.ConnCase
 
   test "GET /", %{conn: conn} do

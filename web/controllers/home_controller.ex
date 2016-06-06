@@ -1,4 +1,4 @@
-defmodule ChoresSchmores.PageController do
+defmodule ChoresSchmores.HomeController do
   use ChoresSchmores.Web, :controller
 
   def index(conn, _params) do

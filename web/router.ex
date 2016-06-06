@@ -16,7 +16,8 @@ defmodule ChoresSchmores.Router do
   scope "/", ChoresSchmores do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/:name/tasks", TaskController, :task
+    get "/", HomeController, :index
   end
 
   # Other scopes may use custom stacks.
