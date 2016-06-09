@@ -20,12 +20,7 @@ defmodule ChoresSchmores.Router do
 
     get "/:name/tasks", TaskController, :task
 
-    get "/users", UserController, :index
-    get "/users/:id", UserController, :show
+    resources "/users", UserController, only: [:index, :show, :new, :create]
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", ChoresSchmores do
-  #   pipe_through :api
-  # end
 end

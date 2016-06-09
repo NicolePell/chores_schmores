@@ -10,7 +10,7 @@ defmodule ChoresSchmores do
       # Start the endpoint when the application starts
       supervisor(ChoresSchmores.Endpoint, []),
       # Start the Ecto repository
-      # supervisor(ChoresSchmores.Repo, []),
+      supervisor(ChoresSchmores.Repo, []),
       # Here you could define other workers and supervisors as children
       # worker(ChoresSchmores.Worker, [arg1, arg2, arg3]),
     ]
