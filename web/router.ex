@@ -18,9 +18,8 @@ defmodule ChoresSchmores.Router do
 
     get "/", HomeController, :index
 
-    get "/:name/tasks", TaskController, :task
-
     resources "/users", UserController, only: [:index, :show, :new, :create]
+
   end
 
 end
