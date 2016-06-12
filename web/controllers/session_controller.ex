@@ -18,4 +18,10 @@ defmodule ChoresSchmores.SessionController do
     end
   end
 
+  def delete(conn, _) do
+    conn
+    |> ChoresSchmores.Auth.logout()
+    |> redirect(to: home_path(conn, :index))
+  end
+
 end
