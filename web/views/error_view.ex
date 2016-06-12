@@ -2,11 +2,11 @@ defmodule ChoresSchmores.ErrorView do
   use ChoresSchmores.Web, :view
 
   def render("404.html", _assigns) do
-    "Page not found"
+    "Doh! Nothing to see here!"
   end
 
   def render("500.html", _assigns) do
-    "Server internal error"
+    "Ugghh! We did something wrong :("
   end
 
   # In case no render clause matches or no
