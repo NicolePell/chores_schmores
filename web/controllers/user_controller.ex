@@ -1,5 +1,6 @@
 defmodule ChoresSchmores.UserController do
   use ChoresSchmores.Web, :controller
+  plug :authenticate when action in [:index, :show]
 
   alias ChoresSchmores.User
 
@@ -19,7 +20,7 @@ defmodule ChoresSchmores.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    changeset = User.changeset(%User{}, user_params)
+    changeset = User.registration_changeset(%User{}, user_params)
     case Repo.insert(changeset) do
       {:ok, user} ->
         conn
@@ -27,6 +28,17 @@ defmodule ChoresSchmores.UserController do
         |> redirect(to: user_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
+    end
+  end
+
+  defp authenticate(conn, _opts) do
+    if conn.assigns.current_user do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You must be logged in to access that page")
+      |> redirect(to: home_path(conn, :index))
+      |> halt()
     end
   end
 
