@@ -20,6 +20,7 @@ defmodule ChoresSchmores.Router do
     get "/", HomeController, :index
 
     resources "/users", UserController, only: [:index, :show, :new, :create]
+    resources "/sessions", SessionController, only: [:new, :create, :delete]
 
   end
 
