@@ -15,13 +15,18 @@ defmodule ChoresSchmores.Router do
   end
 
   scope "/", ChoresSchmores do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :browser
 
     get "/", HomeController, :index
 
-    resources "/users", UserController, only: [:index, :show, :new, :create]
-    resources "/sessions", SessionController, only: [:new, :create, :delete]
+    resources "/user", UserController, only: [:index, :show, :new, :create]
+    resources "/session", SessionController, only: [:new, :create, :delete]
+  end
 
+  scope "/manage", ChoresSchmores do
+    pipe_through [:browser, :authenticate_user]
+
+    resources "/house", HouseController
   end
 
 end

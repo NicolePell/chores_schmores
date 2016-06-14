@@ -1,0 +1,26 @@
+<h2>Listing houses</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for house <- @houses do %>
+    <tr>
+      <td><%= house.name %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: house_path(@conn, :show, house), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: house_path(@conn, :edit, house), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: house_path(@conn, :delete, house), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New house", to: house_path(@conn, :new) %>
