@@ -36,6 +36,7 @@ defmodule ChoresSchmores.Web do
 
       import ChoresSchmores.Router.Helpers
       import ChoresSchmores.Gettext
+      import ChoresSchmores.Auth, only: [authenticate_user: 2]
     end
   end
 
@@ -58,6 +59,8 @@ defmodule ChoresSchmores.Web do
   def router do
     quote do
       use Phoenix.Router
+
+      import ChoresSchmores.Auth, only: [authenticate_user: 2]
     end
   end
 
