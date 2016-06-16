@@ -1,3 +1,6 @@
 <div class="jumbotron">
-<h2>Welcome to ChoresSchmores!</h2>
+  <h2>Welcome to ChoresSchmores!</h2>
+
+  <a href="/manage/house">View my house</a>
+  <a href="/manage/house/new">Create my house</a>
 </div>

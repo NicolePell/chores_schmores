@@ -4,6 +4,8 @@ defmodule ChoresSchmores.House do
   schema "houses" do
     field :name, :string
 
+    has_many :users, ChoresSchmores.User
+
     timestamps
   end
 

@@ -7,6 +7,8 @@ defmodule ChoresSchmores.User do
     field :password, :string, virtual: true
     field :password_hash, :string
 
+    belongs_to :house, ChoresSchmores.House
+
     timestamps
   end
 
