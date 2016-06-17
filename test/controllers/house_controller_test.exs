@@ -63,4 +63,8 @@ defmodule ChoresSchmores.HouseControllerTest do
     assert redirected_to(conn) == house_path(conn, :index)
     refute Repo.get(House, house.id)
   end
+
+  # test "renders house_members on show page"
+
+
 end

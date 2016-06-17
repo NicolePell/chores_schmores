@@ -15,4 +15,6 @@ defmodule ChoresSchmores.HouseTest do
     changeset = House.changeset(%House{}, @invalid_attrs)
     refute changeset.valid?
   end
+
+  # test "houses has many users"
 end
