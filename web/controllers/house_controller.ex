@@ -30,7 +30,11 @@ defmodule ChoresSchmores.HouseController do
 
   def show(conn, %{"id" => id}) do
     house = Repo.get!(House, id)
-    render(conn, "show.html", house: house)
+
+    query = Ecto.assoc(house, :users)
+    house_members = Repo.all(query)
+    
+    render(conn, "show.html", house: house, house_members: house_members)
   end
 
   def edit(conn, %{"id" => id}) do

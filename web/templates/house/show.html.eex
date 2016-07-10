@@ -1,13 +1,13 @@
-<h2>Show house</h2>
+<h2><%= @house.name %></h2>
+
+<h5>House members<h5>
 
 <ul>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @house.name %>
-  </li>
-
+  <%= for user <- @house_members do %>
+    <li><%= user.username %></li>
+  <% end %>
 </ul>
 
+
 <%= link "Edit", to: house_path(@conn, :edit, @house) %>
-<%= link "Back", to: house_path(@conn, :index) %>
+<%= link "Back", to: home_path(@conn, :index) %>
