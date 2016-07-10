@@ -25,8 +25,8 @@ defmodule ChoresSchmores.UserController do
       {:ok, user} ->
         conn
         |> ChoresSchmores.Auth.login(user)
-        |> put_flash(:info, "#{user.name} created!")
-        |> redirect(to: user_path(conn, :index))
+        |> put_flash(:info, "#{user.name}, your profile has been created!")
+        |> redirect(to: home_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
