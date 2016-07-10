@@ -4,9 +4,11 @@
   <%= if @current_user do %>
     <%= if @current_user.house_id != nil do %>
       <%= link "View my house", to: house_path(@conn, :show, @current_user.house_id) %>
+    <% else %>
+      <a href="/manage/house">Join a house</a>
+      <a href="/manage/house/new">Create my house</a>
     <% end %>
   <% else %>
     <a href="/manage/house">Join a house</a>
-    <a href="/manage/house/new">Create my house</a>
   <% end %>
 </div>
