@@ -12,10 +12,12 @@ defmodule ChoresSchmores.User do
     timestamps
   end
 
+  @optional_fields ~w()
+
   def changeset(model, params \\ :empty) do
     model
-    |> cast(params, ~w(name username), [])
-    |> validate_length(:username, min: 1, max: 20)
+    |> cast(params, ~w(name username), @optional_fields)
+    |> validate_length(:username, min: 5, max: 20)
   end
 
   def registration_changeset(model, params) do

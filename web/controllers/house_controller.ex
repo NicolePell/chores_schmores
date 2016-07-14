@@ -10,12 +10,15 @@ defmodule ChoresSchmores.HouseController do
     render(conn, "index.html", houses: houses)
   end
 
-  def new(conn, _params) do
-    changeset = House.changeset(%House{})
+  def new(conn, _params, user) do
+    changeset =
+      user
+      |> build_assoc(:house)
+      |> House.changeset()
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"house" => house_params}) do
+  def create(conn, %{"house" => house_params}, user) do
     changeset = House.changeset(%House{}, house_params)
 
     case Repo.insert(changeset) do
@@ -33,7 +36,7 @@ defmodule ChoresSchmores.HouseController do
 
     query = Ecto.assoc(house, :users)
     house_members = Repo.all(query)
-    
+
     render(conn, "show.html", house: house, house_members: house_members)
   end
 
@@ -67,5 +70,9 @@ defmodule ChoresSchmores.HouseController do
     conn
     |> put_flash(:info, "House deleted successfully.")
     |> redirect(to: house_path(conn, :index))
+  end
+
+  def action(conn, _) do apply(__MODULE__, action_name(conn),
+        [conn, conn.params, conn.assigns.current_user])
   end
 end

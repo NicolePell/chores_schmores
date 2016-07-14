@@ -46,7 +46,7 @@ defmodule ChoresSchmores.Auth do
       conn
     else
       conn
-      |> put_flash(:error, "You must be logged in to access that page")
+      |> put_flash(:error, "You must log in or register to view this page.")
       |> redirect(to: Helpers.home_path(conn, :index))
       |> halt()
     end
