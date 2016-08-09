@@ -71,8 +71,5 @@ defmodule ChoresSchmores.HouseController do
     |> put_flash(:info, "House deleted successfully.")
     |> redirect(to: house_path(conn, :index))
   end
-
-  def action(conn, _) do apply(__MODULE__, action_name(conn),
-        [conn, conn.params, conn.assigns.current_user])
-  end
+  
 end

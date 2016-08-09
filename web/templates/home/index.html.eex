@@ -5,7 +5,7 @@
     <%= if @current_user.house_id != nil do %>
       <%= link "View my house", to: house_path(@conn, :show, @current_user.house_id) %>
     <% else %>
-      <a href="/manage/house">Join a house</a>
+      <%= link "Join a house", to: house_path(@conn, :index) %>
       <a href="/manage/house/new">Create my house</a>
     <% end %>
   <% else %>

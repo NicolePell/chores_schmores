@@ -21,11 +21,6 @@ defmodule ChoresSchmores.Router do
 
     resources "/user", UserController, only: [:index, :show, :new, :create]
     resources "/session", SessionController, only: [:new, :create, :delete]
-  end
-
-  scope "/manage", ChoresSchmores do
-    pipe_through [:browser, :authenticate_user]
-
     resources "/house", HouseController
   end
 
