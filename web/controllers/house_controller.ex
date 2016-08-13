@@ -23,9 +23,8 @@ defmodule ChoresSchmores.HouseController do
 
     case Repo.insert(changeset) do
       {:ok, _house} ->
-        user = Ecto.Changeset.change(user, house_id: _house.id)
-        Repo.update!(user)
-        
+        add_house_id_to_user(user, _house)
+
         conn
         |> put_flash(:info, "House created successfully.")
         |> redirect(to: house_path(conn, :show, _house))
@@ -49,12 +48,14 @@ defmodule ChoresSchmores.HouseController do
     render(conn, "edit.html", house: house, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "house" => house_params}) do
+  def update(conn, %{"id" => id, "house" => house_params}, user) do
     house = Repo.get!(House, id)
     changeset = House.changeset(house, house_params)
 
     case Repo.update(changeset) do
       {:ok, house} ->
+        add_house_id_to_user(user, house)
+
         conn
         |> put_flash(:info, "House updated successfully.")
         |> redirect(to: house_path(conn, :show, house))
@@ -78,6 +79,11 @@ defmodule ChoresSchmores.HouseController do
   def action(conn, _) do
     apply(__MODULE__, action_name(conn),
           [conn, conn.params, conn.assigns.current_user])
+  end
+
+  defp add_house_id_to_user(user, house) do
+    changed_user = Ecto.Changeset.change(user, house_id: house.id)
+    Repo.update!(changed_user)
   end
 
 end
