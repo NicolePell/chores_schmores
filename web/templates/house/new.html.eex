@@ -1,5 +1,7 @@
 <h2>New house</h2>
 
+<%= @current_user.name %>
+
 <%= render "form.html", changeset: @changeset,
                         action: house_path(@conn, :create) %>
 

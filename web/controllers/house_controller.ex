@@ -2,19 +2,19 @@ defmodule ChoresSchmores.HouseController do
   use ChoresSchmores.Web, :controller
 
   alias ChoresSchmores.House
+  alias ChoresSchmores.User
 
   plug :scrub_params, "house" when action in [:create, :update]
 
-  def index(conn, _params) do
+  def index(conn, _params, user) do
     houses = Repo.all(House)
+
     render(conn, "index.html", houses: houses)
   end
 
   def new(conn, _params, user) do
-    changeset =
-      user
-      |> build_assoc(:house)
-      |> House.changeset()
+    changeset = House.changeset(%House{})
+
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -23,15 +23,18 @@ defmodule ChoresSchmores.HouseController do
 
     case Repo.insert(changeset) do
       {:ok, _house} ->
+        user = Ecto.Changeset.change(user, house_id: _house.id)
+        Repo.update!(user)
+        
         conn
         |> put_flash(:info, "House created successfully.")
-        |> redirect(to: house_path(conn, :index))
+        |> redirect(to: house_path(conn, :show, _house))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"id" => id}, user) do
     house = Repo.get!(House, id)
 
     query = Ecto.assoc(house, :users)
@@ -40,7 +43,7 @@ defmodule ChoresSchmores.HouseController do
     render(conn, "show.html", house: house, house_members: house_members)
   end
 
-  def edit(conn, %{"id" => id}) do
+  def edit(conn, %{"id" => id}, user) do
     house = Repo.get!(House, id)
     changeset = House.changeset(house)
     render(conn, "edit.html", house: house, changeset: changeset)
@@ -60,7 +63,7 @@ defmodule ChoresSchmores.HouseController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, %{"id" => id}, user) do
     house = Repo.get!(House, id)
 
     # Here we use delete! (with a bang) because we expect
@@ -71,5 +74,10 @@ defmodule ChoresSchmores.HouseController do
     |> put_flash(:info, "House deleted successfully.")
     |> redirect(to: house_path(conn, :index))
   end
-  
+
+  def action(conn, _) do
+    apply(__MODULE__, action_name(conn),
+          [conn, conn.params, conn.assigns.current_user])
+  end
+
 end

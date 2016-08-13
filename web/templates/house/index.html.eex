@@ -1,5 +1,7 @@
 <h2>Listing houses</h2>
 
+<%= @current_user.name %>
+
 <table class="table">
   <thead>
     <tr>

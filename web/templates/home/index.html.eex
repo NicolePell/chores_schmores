@@ -6,9 +6,9 @@
       <%= link "View my house", to: house_path(@conn, :show, @current_user.house_id) %>
     <% else %>
       <%= link "Join a house", to: house_path(@conn, :index) %>
-      <a href="/manage/house/new">Create my house</a>
+      <%= link "Create a house", to: house_path(@conn, :new) %>
     <% end %>
   <% else %>
-    <a href="/manage/house">Join a house</a>
+    <%= link "Join a house", to: house_path(@conn, :index) %>
   <% end %>
 </div>
