@@ -36,8 +36,7 @@ defmodule ChoresSchmores.HouseController do
   def show(conn, %{"id" => id}, user) do
     house = Repo.get!(House, id)
 
-    query = Ecto.assoc(house, :users)
-    house_members = Repo.all(query)
+    house_members = fetch_house_members(house)
 
     render(conn, "show.html", house: house, house_members: house_members)
   end
@@ -84,6 +83,11 @@ defmodule ChoresSchmores.HouseController do
   defp add_house_id_to_user(user, house) do
     changed_user = Ecto.Changeset.change(user, house_id: house.id)
     Repo.update!(changed_user)
+  end
+
+  defp fetch_house_members(house) do
+    query = assoc(house, :users)
+    Repo.all(query)
   end
 
 end
