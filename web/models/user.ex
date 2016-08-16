@@ -18,6 +18,7 @@ defmodule ChoresSchmores.User do
     model
     |> cast(params, ~w(name username), @optional_fields)
     |> validate_length(:username, min: 5, max: 20)
+    |> unique_constraint(:username)
   end
 
   def registration_changeset(model, params) do

@@ -6,16 +6,16 @@ defmodule ChoresSchmores.ErrorViewTest do
 
   test "renders 404.html" do
     assert render_to_string(ChoresSchmores.ErrorView, "404.html", []) ==
-           "Page not found"
+           "Doh! Nothing to see here!"
   end
 
   test "render 500.html" do
     assert render_to_string(ChoresSchmores.ErrorView, "500.html", []) ==
-           "Server internal error"
+           "Ugghh! We did something wrong :("
   end
 
   test "render any other" do
     assert render_to_string(ChoresSchmores.ErrorView, "505.html", []) ==
-           "Server internal error"
+           "Ugghh! We did something wrong :("
   end
 end
