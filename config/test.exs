@@ -12,8 +12,7 @@ config :logger, level: :warn
 # Configure your database
 config :chores_schmores, ChoresSchmores.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "nicolepell",
   database: "chores_schmores_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

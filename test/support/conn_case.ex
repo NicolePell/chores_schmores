@@ -26,6 +26,7 @@ defmodule ChoresSchmores.ConnCase do
       import Ecto.Query, only: [from: 1, from: 2]
 
       import ChoresSchmores.Router.Helpers
+      import ChoresSchmores.TestHelpers
 
       # The default endpoint for testing
       @endpoint ChoresSchmores.Endpoint

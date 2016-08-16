@@ -2,7 +2,6 @@ defmodule ChoresSchmores.HouseController do
   use ChoresSchmores.Web, :controller
 
   alias ChoresSchmores.House
-  alias ChoresSchmores.User
 
   plug :scrub_params, "house" when action in [:create, :update]
 
@@ -22,12 +21,12 @@ defmodule ChoresSchmores.HouseController do
     changeset = House.changeset(%House{}, house_params)
 
     case Repo.insert(changeset) do
-      {:ok, _house} ->
-        add_house_id_to_user(user, _house)
+      {:ok, house} ->
+        add_house_id_to_user(user, house)
 
         conn
         |> put_flash(:info, "House created successfully.")
-        |> redirect(to: house_path(conn, :show, _house))
+        |> redirect(to: house_path(conn, :show, house))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
