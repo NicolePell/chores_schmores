@@ -5,10 +5,13 @@
 # is restricted to this project.
 use Mix.Config
 
+# General application configuration
+config :chores_schmores,
+  ecto_repos: [ChoresSchmores.Repo]
+
 # Configures the endpoint
 config :chores_schmores, ChoresSchmores.Endpoint,
   url: [host: "localhost"],
-  root: Path.dirname(__DIR__),
   secret_key_base: "maFfKnTUC7D29xWJDIanuKxp9+YhnQfoqUsa68PpCkokQOl6a81ZyAG69CsWlzr8",
   render_errors: [accepts: ~w(html json)],
   pubsub: [name: ChoresSchmores.PubSub,
