@@ -5,13 +5,13 @@ defmodule ChoresSchmores.HouseController do
 
   plug :scrub_params, "house" when action in [:create, :update]
 
-  def index(conn, _params, user) do
+  def index(conn, _params, _user) do
     houses = Repo.all(House)
 
     render(conn, "index.html", houses: houses)
   end
 
-  def new(conn, _params, user) do
+  def new(conn, _params, _user) do
     changeset = House.changeset(%House{})
 
     render(conn, "new.html", changeset: changeset)
@@ -32,7 +32,7 @@ defmodule ChoresSchmores.HouseController do
     end
   end
 
-  def show(conn, %{"id" => id}, user) do
+  def show(conn, %{"id" => id}, _user) do
     house = Repo.get!(House, id)
 
     house_members = fetch_house_members(house)
@@ -40,7 +40,7 @@ defmodule ChoresSchmores.HouseController do
     render(conn, "show.html", house: house, house_members: house_members)
   end
 
-  def edit(conn, %{"id" => id}, user) do
+  def edit(conn, %{"id" => id}, _user) do
     house = Repo.get!(House, id)
     changeset = House.changeset(house)
     render(conn, "edit.html", house: house, changeset: changeset)
@@ -62,7 +62,7 @@ defmodule ChoresSchmores.HouseController do
     end
   end
 
-  def delete(conn, %{"id" => id}, user) do
+  def delete(conn, %{"id" => id}, _user) do
     house = Repo.get!(House, id)
 
     # Here we use delete! (with a bang) because we expect

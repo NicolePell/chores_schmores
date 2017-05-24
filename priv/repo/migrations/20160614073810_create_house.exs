@@ -5,7 +5,7 @@ defmodule ChoresSchmores.Repo.Migrations.CreateHouse do
     create table(:houses) do
       add :name, :string
 
-      timestamps
+      timestamps()
     end
 
   end

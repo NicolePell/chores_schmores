@@ -9,14 +9,15 @@ defmodule ChoresSchmores.User do
 
     belongs_to :house, ChoresSchmores.House
 
-    timestamps
+    timestamps()
   end
 
-  @optional_fields ~w()
+  @required_fields ~w(name username)
 
-  def changeset(model, params \\ :empty) do
+  def changeset(model, params \\ %{}) do
     model
-    |> cast(params, ~w(name username), @optional_fields)
+    |> cast(params, @required_fields)
+    |> validate_required([:name, :username])
     |> validate_length(:username, min: 5, max: 20)
     |> unique_constraint(:username)
   end
